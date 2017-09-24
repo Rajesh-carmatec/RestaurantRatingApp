@@ -1,0 +1,20 @@
+<div class="side_bar_search">
+    <%= form_tag restaurants_path, :method => :get, class: "navbar-form navbar-right", role: "search" do %>
+        <div class="form-group">
+        	<span>
+        		Search Restaurant : <%= text_field_tag :search, nil, class: "form-control" %>
+        	</span>	
+        	<span>
+  	        Based on : <%= select_tag("criteria", options_for_select([ "Restaurant Name", "Cuisine", "Location"]),{class: "form-control"}) %>
+          </span>
+              
+          <span>
+  	        <%= submit_tag "Search", :name => nil, class: "btn btn-warning" %>
+          </span>
+          <span>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete , class: "btn btn-warning" %>
+          </span>
+        </div>
+    <% end %>
+</div>
+<br>

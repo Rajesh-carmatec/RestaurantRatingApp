@@ -1,0 +1,19 @@
+<div class="col-sm-7">
+  <div class="row">
+    <div class="thumbnail">
+      <%= link_to (image_tag restaurant.thumb || restaurant.image.url(:medium), class: 'image', height: '300', width: '300'), restaurant %>
+    </div>  
+  </div>
+</div>
+<div class="col-sm-5">
+  <div class="row index-restaurant-elements">
+    <table class="table table-responsive">
+      <tr>
+        <h3><%= link_to restaurant.name, restaurant %></h3>
+      </tr>
+      <tr>
+        <td><%= restaurant.cuisines %></td>
+      </tr>
+    </table>
+  </div>        
+</div>

@@ -1,0 +1,75 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-8">
+        <%= image_tag @restaurant.thumb || @restaurant.image.url(:medium) %>
+        <div class="table-responsive restaurant_info">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td><strong>Restaurant Name:</strong></td>
+                <td><%= @restaurant.name %></td>
+              </tr>
+              <tr>
+                <td><strong>Offered Cuisines:</strong></td>
+                <td><%= @restaurant.cuisines %></td>
+              </tr>
+              <tr>
+                <td><strong>Address:</strong></td>
+                <td><%= @restaurant.location.address %></td>
+              </tr>
+              <tr>
+                <td><strong>Online Delivery Available :</strong></td>
+                <td><%= @restaurant.has_online_delivery ? "Yes" : "No" %></td>
+              </tr>
+              <tr>
+                <td><strong>Orders delivering now:</strong></td>
+                <td><%= @restaurant.is_delivering_now  ? "Yes" : "No" %></td>
+              </tr>
+              <tr>
+                <td><strong>Table booking:</strong></td>
+                <td><%= @restaurant.has_table_booking  ? "Yes" : "No" %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-3 show_info">
+        <div class="nav-links">
+          <% if user_signed_in? %>
+            <%= link_to 'Back', restaurants_path, class: "btn btn-info" %>  /  
+            <%= link_to 'Edit', edit_restaurant_path(@restaurant), class: "btn btn-info" %>
+          <% end %>  
+        </div>
+        <h1 class=""><%= @restaurant.name %></h1>
+        <p><%= @restaurant.cuisines %></p><br/>
+
+        <% if @reviews.blank? %>
+          <h3>No reviews just yet, would you like to add the first!</h3>
+        <% else %>
+          <br/>
+          <h4><em><%= "#{@reviews.length} recent reviews" %></em></h4>
+          <% @reviews.each do |review| %>
+            <div class="reviews">
+              <div class="star-rating" data-score= <%= review.aggregate_rating %> ></div>
+              <p><%= review.rating_text %></p>
+            </div>
+          <% end %>
+        <% end %>
+        <% if user_signed_in? %>
+          <%= link_to "Write New Review", new_restaurant_user_rating_path(@restaurant), class: "btn btn-warning review_btn" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
+  });
+</script>

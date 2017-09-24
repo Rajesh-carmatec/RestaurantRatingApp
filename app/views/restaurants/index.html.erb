@@ -1,0 +1,11 @@
+<% if !user_signed_in? %>
+  <div class="jumbotron">
+    <h2>Check-in To Your Favorite Restaurants.</h2>
+    <p>Listing the restaurants from different parts of Mumbai and Delhi locations based on review and ratings given by the users.</p>
+    <div class="homepage-sign-up-btn"><%= link_to "Sign Up To Write A Review", new_user_registration_path, class: "btn btn-primary btn-lg" %></div>
+  </div>
+<% end %>
+
+<div class="row">
+  <%= render partial: 'restaurant', collection: @restaurants %>
+</div>

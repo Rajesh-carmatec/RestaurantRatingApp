@@ -1,0 +1,39 @@
+<%= form_for([@restaurant, @user_rating], remote: true) do |f| %>
+  <% if @user_rating.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_rating.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% @user_rating.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <h1><%= params[:action].capitalize %> review</h1>
+    <div class="row">
+      <div class="col-md-12 col-md-6 col-md-3">
+        <%= f.label :aggregate_rating %><br>
+        <%= f.text_field :aggregate_rating, class: "form-control" %>
+      </div>
+      <div class="col-md-12 col-md-6 col-md-3">
+        <%= f.label :rating_text %><br>
+        <%= f.text_area :rating_text, class: "form-control", rows: 5, cols: 5 %>
+      </div>
+    </div>
+    <br/>
+    <div class="actions">
+        <%= f.submit "Post review", class: "btn btn-warning" %>
+        <%= link_to 'Back', restaurant_path(@restaurant), class: "btn btn-info" %>
+      </div>
+  </div>
+<% end %>
+
+<script>
+  $('#star-rating').raty({
+    path: '/assets/',
+    scoreName: 'review[aggregate_rating]'
+  });
+</script>

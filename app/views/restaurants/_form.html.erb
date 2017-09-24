@@ -1,0 +1,52 @@
+<%= form_for restaurant, html: { multipart: true } do |f| %>
+  <% if restaurant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+
+      <ul>
+      <% restaurant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cuisines %>
+    <%= f.text_field :cuisines %>
+  </div>
+
+  <div class="field">
+    <%= f.label :currency %>
+    <%= f.text_field :currency %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :has_online_delivery %>
+    <%= f.check_box :has_online_delivery %>
+  </div>
+
+  <div class="field">
+    <%= f.label :is_delivering_now %>
+    <%= f.check_box :is_delivering_now %>
+  </div>
+
+  <div class="field">
+    <%= f.label :has_table_booking %>
+    <%= f.check_box :has_table_booking %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
