@@ -2,7 +2,7 @@ class Restaurant < ApplicationRecord
 	
 	has_one :location
 	has_many :user_ratings #, dependent: :destroy
-	belongs_to :user
+	# belongs_to :user
 
 	has_attached_file :image, styles: { medium: "400x600#"}, default_url: "/images/:style/missing.png"
   	
